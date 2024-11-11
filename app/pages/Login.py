@@ -1,7 +1,7 @@
 import flet as ft
 import requests
 
-API_URL = "http://localhost:5000"
+API_URL = "https://api-pim.onrender.com"
 SECRET_KEY = "0d8689404a2c83325a0353496caafcdfa01abd76f4511037bad2a66ed3dd6050"
 
 class TelaLogin:
