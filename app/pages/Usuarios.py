@@ -4,7 +4,7 @@ import requests
 from ..components.appbar import Appbar
 from ..components.sidebar import Sidebar
 
-API_URL = "http://localhost:5000"
+API_URL = "https://api-pim.onrender.com"
 SECRET_KEY = "0d8689404a2c83325a0353496caafcdfa01abd76f4511037bad2a66ed3dd6050"
 
 class UsuariosAPI(ft.Column):
@@ -30,7 +30,7 @@ class UsuariosAPI(ft.Column):
             "Authorization": f"Bearer {self.app_state.token}"
         }
 
-        res = requests.get(f"{API_URL}/users", headers=params)
+        res = requests.get(f"{API_URL}/users")
 
         usuarios = res.json()
 
