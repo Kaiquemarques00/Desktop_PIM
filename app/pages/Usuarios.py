@@ -30,7 +30,7 @@ class UsuariosAPI(ft.Column):
             "Authorization": f"Bearer {self.app_state.token}"
         }
 
-        res = requests.get(f"{API_URL}/users")
+        res = requests.get(f"{API_URL}/users", headers=params)
 
         usuarios = res.json()
 
