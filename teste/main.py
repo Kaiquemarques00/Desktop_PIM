@@ -1,10 +1,25 @@
 import flet as ft
 
 def main(page: ft.Page):
-    # Definindo controles que expandem
-    page.add(
-        ft.Container(ft.Text("Expande para preencher"), expand=True),
-        ft.Container(ft.Text("50% da largura"), width="50%"),
+    # Sem padding
+    container1 = ft.Container(
+        content=ft.Text("Sem Padding"),
+        width=200,
+        height=200,
+        bgcolor=ft.colors.GREEN,
+        alignment=ft.alignment.center,  # Alinhamento centralizado
     )
+    
+    # Com padding
+    container2 = ft.Container(
+        content=ft.Text("Com Padding"),
+        width=200,
+        height=200,
+        bgcolor=ft.colors.BLUE,
+        alignment=ft.alignment.center,  # Alinhamento centralizado
+        padding=20,  # Adiciona padding de 20 pixels
+    )
+
+    page.add(container1, container2)
 
 ft.app(target=main)
