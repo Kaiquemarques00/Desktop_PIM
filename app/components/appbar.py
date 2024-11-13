@@ -26,6 +26,7 @@ class Appbar:
 
         appbar=ft.Container(
             height=75,
+            width=self.page.width * 0.95,
             bgcolor="#1D3331",
             content=ft.Row(
                 [

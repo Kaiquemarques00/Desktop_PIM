@@ -11,6 +11,17 @@ class TelaLogin:
 
     def login(self):
 
+        def snack_erro_API(e, message):
+            self.page.snack_bar=ft.SnackBar(
+                ft.Text(
+                    message,
+                    text_align=ft.TextAlign.CENTER
+                ),
+                bgcolor="#DA4E49"
+            )
+            self.page.snack_bar.open=True
+            self.page.update()
+
         def autenticar_usuario(e):
             dados_login={
                 "email":input_email.value,
@@ -28,10 +39,10 @@ class TelaLogin:
                     self.page.go("/home")
 
                 else:
-                    print("erro")
+                    snack_erro_API(e, response_data)
 
-            except requests.exceptions.RequestException as ex:
-                print("erro")
+            except requests.exceptions.RequestException as e:
+                snack_erro_API(e, response_data)
 
             self.page.update()
 

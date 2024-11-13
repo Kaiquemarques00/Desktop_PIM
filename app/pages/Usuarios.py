@@ -12,7 +12,6 @@ class UsuariosAPI(ft.Column):
         self.app_state=app_state
         super().__init__()
 
-
         self.users_column = ft.Column(
             expand=True,
         )
@@ -47,9 +46,46 @@ class UsuariosAPI(ft.Column):
             self.users_column.controls.append(item_container)
 
     def create_users(self):
-        btn_create=ft.ElevatedButton("Criar",)
+        def cria_user(e):
+            dados_create={
+                "nome":input_nome.value,
+                "email":input_email.value,
+                "senha":input_senha.value,
+                "role":input_role.value
+            }
 
-        self.users_column.controls.append(btn_create)
+            params = {
+            "Authorization": f"Bearer {self.app_state.token}"
+            }
+
+            response = requests.post(f"{API_URL}/user", headers=params, json=dados_create)
+            res= response.json()
+            print()
+
+            message.value = res
+
+
+        btn_create=ft.ElevatedButton("Criar Usuário", on_click=cria_user)
+        input_nome=ft.TextField(label="Insira o nome do usuário: ",color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK))
+        input_email=ft.TextField(label="Insira o E-mail do usuário: ",color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK))
+        input_senha=ft.TextField(label="Insira a senha do usuário: ",color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK))
+        input_role=ft.TextField(label="Insira o tipo de usuário do usuário: ",color=ft.colors.BLACK,label_style=ft.TextStyle(color=ft.colors.BLACK))
+        message=ft.Text(value="Alerta")
+
+        elemento_cria_user=ft.Container(
+            padding=30,
+            content=ft.Column(
+                [
+                    input_nome,
+                    input_email,
+                    input_senha,
+                    input_role,
+                    btn_create
+                ],
+            )
+        )
+
+        self.users_column.controls.append(elemento_cria_user)
 
 class TelaUsuarios:
 
@@ -68,15 +104,17 @@ class TelaUsuarios:
             content=ft.Row(
                 [
                     sidebar,
-                    ft.Column(
+                    ft.Column(                  
                         [
                             appbar,
-                            users
+                            users,
                         ],
-                        expand=True
-                    )
+                        expand=True,
+                        scroll="auto"
+                    ),
                 ],
-                spacing=0
+                scroll="auto",
+                spacing=0,
             )
         )
 
